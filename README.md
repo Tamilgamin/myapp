@@ -1,16 +1,70 @@
-# myapp
+# AR Chemistry Lab
 
-A new Flutter project.
+A complete Augmented Reality Chemistry Laboratory mobile application built with Flutter.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- AR experiments using ARCore (Android) and ARKit (iOS)
+- 50+ chemistry experiments
+- AI Chemistry Teacher powered by Gemini API
+- Leaderboard and scoring system
+- Offline support
+- AdMob monetization
+- Sound effects and haptic feedback
 
-A few resources to get you started if this is your first Flutter project:
+## Setup
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Install Flutter: https://flutter.dev/docs/get-started/install
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+2. Clone or download the project.
+
+3. Run `flutter pub get` to install dependencies.
+
+4. For Firebase:
+   - Create a Firebase project
+   - Add Android and iOS apps
+   - Download google-services.json and place in android/app/
+   - Download GoogleService-Info.plist and place in ios/Runner/
+
+5. For AdMob:
+   - Create AdMob account
+   - Replace test ad unit IDs with your own
+
+6. For Gemini API:
+   - Get API key from Google AI Studio
+   - Replace placeholder in AI assistant with actual API call
+
+7. Run `flutter run` to build and run the app.
+
+## Project Structure
+
+- lib/
+  - components/ - Reusable UI components
+  - screens/ - App screens
+  - ar_engine/ - AR functionality
+  - reaction_engine/ - Reaction simulations
+  - experiment_database/ - Experiment data
+  - ai_assistant/ - AI chat functionality
+  - services/ - App services (state, ads, etc.)
+  - ads/ - AdMob integration
+
+- assets/
+  - experiments.json - Experiment data
+  - sounds/ - Sound effects
+  - models/ - 3D models for AR
+
+## Building
+
+- Android: `flutter build apk`
+- iOS: `flutter build ios` (requires macOS)
+
+## Requirements
+
+- Flutter 3.9+
+- Android API 24+ or iOS 12+
+- ARCore compatible device for Android
+- ARKit compatible device for iOS
+
+## License
+
+This project is for educational purposes.
