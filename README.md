@@ -68,3 +68,11 @@ A complete Augmented Reality Chemistry Laboratory mobile application built with 
 ## License
 
 This project is for educational purposes.
+# example of installing via sdkmanager (after downloading the cmdline-tools)
+mkdir -p ~/Android/Sdk/cmdline-tools
+cd ~/Android/Sdk/cmdline-tools
+# download and unzip latest command-line-tools from https://developer.android.com/studio#command-tools
+unzip ~/Downloads/commandlinetools-linux-*.zip
+
+# then install platforms/build-tools
+yes | ~/Android/Sdk/cmdline-tools/bin/sdkmanager --sdk_root=${HOME}/Android/Sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2"

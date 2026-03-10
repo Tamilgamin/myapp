@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ar_chemistry_lab/screens/experiment_library_screen.dart';
 import 'package:ar_chemistry_lab/screens/ai_assistant_screen.dart';
 import 'package:ar_chemistry_lab/screens/leaderboard_screen.dart';
 import 'package:ar_chemistry_lab/screens/settings_screen.dart';
-import 'package:ar_chemistry_lab/services/app_state.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

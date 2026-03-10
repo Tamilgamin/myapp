@@ -86,16 +86,14 @@ class _ARExperimentScreenState extends State<ARExperimentScreen> {
     var singleHitTestResult = hitTestResults.firstWhere(
       (hitTestResult) => hitTestResult.type == ARHitTestResultType.plane,
     );
-    if (singleHitTestResult != null) {
-      var newAnchor = ARPlaneAnchor(
-        transformation: singleHitTestResult.worldTransform,
-      );
-      arAnchorManager.addAnchor(newAnchor);
-      setState(() {
-        surfaceDetected = true;
-      });
+    var newAnchor = ARPlaneAnchor(
+      transformation: singleHitTestResult.worldTransform,
+    );
+    arAnchorManager.addAnchor(newAnchor);
+    setState(() {
+      surfaceDetected = true;
+    });
     }
-  }
 
   void startExperiment() {
     // Add lab table and equipment
