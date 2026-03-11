@@ -1,41 +1,33 @@
 class Chemical {
   final String name;
   final String formula;
-  final String hazards;
-  final String state; // solid, liquid, gas
-  final String color;
-  final double molarMass;
-  final String? imageUrl;
+  final String hazardSymbols;
+  final String hazardStatements;
+  final String precautionaryStatements;
 
   Chemical({
     required this.name,
     required this.formula,
-    required this.hazards,
-    required this.state,
-    required this.color,
-    required this.molarMass,
-    this.imageUrl,
+    required this.hazardSymbols,
+    required this.hazardStatements,
+    required this.precautionaryStatements,
   });
 
   factory Chemical.fromJson(Map<String, dynamic> json) {
     return Chemical(
-      name: json['name'],
-      formula: json['formula'],
-      hazards: json['hazards'],
-      state: json['state'],
-      color: json['color'],
-      molarMass: json['molarMass'],
-      imageUrl: json['imageUrl'],
+      name: json['name'] ?? '',
+      formula: json['formula'] ?? '',
+      hazardSymbols: json['hazardSymbols'] ?? '',
+      hazardStatements: json['hazardStatements'] ?? '',
+      precautionaryStatements: json['precautionaryStatements'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() => {
     'name': name,
     'formula': formula,
-    'hazards': hazards,
-    'state': state,
-    'color': color,
-    'molarMass': molarMass,
-    'imageUrl': imageUrl,
+    'hazardSymbols': hazardSymbols,
+    'hazardStatements': hazardStatements,
+    'precautionaryStatements': precautionaryStatements,
   };
 }

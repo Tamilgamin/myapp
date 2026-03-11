@@ -3,36 +3,31 @@ import 'dart:convert';
 
 class AIService {
   static final AIService _instance = AIService._internal();
-  late String _apiKey;
-  static const String _baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
-  factory AIService({String? apiKey}) {
-    if (apiKey != null) {
-      _instance._apiKey = apiKey;
-    }
+  factory AIService() {
     return _instance;
   }
 
   AIService._internal();
 
-  void setApiKey(String apiKey) {
-    _apiKey = apiKey;
-  }
+  /// Replace with your actual Gemini API key
+  static const String _apiKey = 'YOUR_GEMINI_API_KEY';
+  static const String _apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+
+  final List<Map<String, String>> _conversationHistory = [];
 
   Future<String> askQuestion(String question) async {
     try {
-      if (_apiKey.isEmpty) {
-        return 'AI service not configured. Please add your Gemini API key in settings.';
-      }
+      _conversationHistory.add({'role': 'user', 'content': question});
 
       final response = await http.post(
-        Uri.parse('$_baseUrl?key=$_apiKey'),
+        Uri.parse('$_apiUrl?key=$_apiKey'),
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
+        body: json.encode({
           'contents': [
             {
               'parts': [
-                {'text': _buildChemistryPrompt(question)}
+                {'text': '${_buildSystemPrompt()}\n\nQuestion: $question'}
               ]
             }
           ],
@@ -40,44 +35,42 @@ class AIService {
             'temperature': 0.7,
             'topK': 40,
             'topP': 0.95,
-            'maxOutputTokens': 2048,
-          },
+            'maxOutputTokens': 1024,
+          }
         }),
       );
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        final text = data['candidates'][0]['content']['parts'][0]['text'];
-        return text;
+        final jsonResponse = json.decode(response.body);
+        final answer = jsonResponse['candidates'][0]['content']['parts'][0]['text'];
+        
+        _conversationHistory.add({'role': 'assistant', 'content': answer});
+        return answer;
       } else {
-        return 'Error: ${response.statusCode}';
+        throw Exception('Failed to get response from AI: ${response.statusCode}');
       }
     } catch (e) {
-      return 'Error communicating with AI: $e';
+      print('Error calling AI service: $e');
+      return 'Sorry, I encountered an error. Please try again.';
     }
   }
 
-  String _buildChemistryPrompt(String question) {
-    return '''You are an expert chemistry teacher helping students learn through AR Chemistry Lab.
-    
-Student Question: $question
+  String _buildSystemPrompt() {
+    return '''You are an expert chemistry teacher helping students learn chemistry through AR experiments. You are knowledgeable about:
+- Chemical reactions and mechanisms
+- Laboratory safety
+- Equipment usage
+- Chemical properties and behaviors
+- Practical experiment procedures
 
-Please provide:
-1. A clear, concise explanation suitable for students
-2. Examples if relevant
-3. Safety considerations if applicable
-4. Tips for hands-on experiments
-
-Keep your response educational and encouraging.''';
+Provide clear, educational explanations that are appropriate for high school students. 
+Focus on helping students understand concepts and safety.
+Keep responses concise but informative.''';
   }
 
-  Future<String> explainExperiment(String experimentTitle, String reactionEquation) async {
-    final question = 'Explain the chemistry of the experiment: $experimentTitle. The reaction equation is: $reactionEquation. What should I observe during this reaction?';
-    return askQuestion(question);
+  void clearHistory() {
+    _conversationHistory.clear();
   }
 
-  Future<String> getExperimentTips(String experimentTitle) async {
-    final question = 'What are practical tips and safety precautions for performing the $experimentTitle experiment?';
-    return askQuestion(question);
-  }
+  List<Map<String, String>> get conversationHistory => _conversationHistory;
 }

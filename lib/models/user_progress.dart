@@ -1,83 +1,75 @@
 class UserProgress {
-  final String userId;
+  final int userId;
   final int totalScore;
-  final List<int> completedExperiments;
-  final List<QuizScore> quizScores;
-  final DateTime lastActivity;
-  final int totalTimeSpent; // in minutes
-  final int level;
-  final List<String> unlockedAchievements;
-  final Map<String, dynamic> preferences;
+  final int rank;
+  final int experimentsCompleted;
+  final int quizzesAnsweredCorrectly;
+  final DateTime lastActiveDate;
+  final List<int> unlockedExperiments;
+  final List<int> completedQuizzes;
 
   UserProgress({
     required this.userId,
     required this.totalScore,
-    required this.completedExperiments,
-    required this.quizScores,
-    required this.lastActivity,
-    required this.totalTimeSpent,
-    required this.level,
-    required this.unlockedAchievements,
-    required this.preferences,
+    required this.rank,
+    required this.experimentsCompleted,
+    required this.quizzesAnsweredCorrectly,
+    required this.lastActiveDate,
+    required this.unlockedExperiments,
+    required this.completedQuizzes,
   });
 
   factory UserProgress.fromJson(Map<String, dynamic> json) {
     return UserProgress(
-      userId: json['userId'],
-      totalScore: json['totalScore'],
-      completedExperiments: List<int>.from(json['completedExperiments']),
-      quizScores: (json['quizScores'] as List?)?.map((q) => QuizScore.fromJson(q)).toList() ?? [],
-      lastActivity: DateTime.parse(json['lastActivity']),
-      totalTimeSpent: json['totalTimeSpent'],
-      level: json['level'],
-      unlockedAchievements: List<String>.from(json['unlockedAchievements'] ?? []),
-      preferences: json['preferences'] ?? {},
+      userId: json['userId'] ?? 0,
+      totalScore: json['totalScore'] ?? 0,
+      rank: json['rank'] ?? 0,
+      experimentsCompleted: json['experimentsCompleted'] ?? 0,
+      quizzesAnsweredCorrectly: json['quizzesAnsweredCorrectly'] ?? 0,
+      lastActiveDate: DateTime.tryParse(json['lastActiveDate'] ?? '') ?? DateTime.now(),
+      unlockedExperiments: List<int>.from(json['unlockedExperiments'] ?? []),
+      completedQuizzes: List<int>.from(json['completedQuizzes'] ?? []),
     );
   }
 
   Map<String, dynamic> toJson() => {
     'userId': userId,
     'totalScore': totalScore,
-    'completedExperiments': completedExperiments,
-    'quizScores': quizScores.map((q) => q.toJson()).toList(),
-    'lastActivity': lastActivity.toIso8601String(),
-    'totalTimeSpent': totalTimeSpent,
-    'level': level,
-    'unlockedAchievements': unlockedAchievements,
-    'preferences': preferences,
+    'rank': rank,
+    'experimentsCompleted': experimentsCompleted,
+    'quizzesAnsweredCorrectly': quizzesAnsweredCorrectly,
+    'lastActiveDate': lastActiveDate.toIso8601String(),
+    'unlockedExperiments': unlockedExperiments,
+    'completedQuizzes': completedQuizzes,
   };
 }
 
-class QuizScore {
-  final int experimentId;
+class LeaderboardEntry {
+  final String userName;
   final int score;
-  final int totalQuestions;
-  final DateTime completedAt;
-  final List<bool> answers;
+  final int rank;
+  final int experimentsCompleted;
 
-  QuizScore({
-    required this.experimentId,
+  LeaderboardEntry({
+    required this.userName,
     required this.score,
-    required this.totalQuestions,
-    required this.completedAt,
-    required this.answers,
+    required this.rank,
+    required this.experimentsCompleted,
   });
 
-  factory QuizScore.fromJson(Map<String, dynamic> json) {
-    return QuizScore(
-      experimentId: json['experimentId'],
-      score: json['score'],
-      totalQuestions: json['totalQuestions'],
-      completedAt: DateTime.parse(json['completedAt']),
-      answers: List<bool>.from(json['answers']),
+  factory LeaderboardEntry.fromJson(Map<String, dynamic> json) {
+    return LeaderboardEntry(
+      userName: json['userName'] ?? '',
+      score: json['score'] ?? 0,
+      rank: json['rank'] ?? 0,
+      experimentsCompleted: json['experimentsCompleted'] ?? 0,
     );
   }
 
   Map<String, dynamic> toJson() => {
-    'experimentId': experimentId,
+    'userName': userName,
     'score': score,
-    'totalQuestions': totalQuestions,
-    'completedAt': completedAt.toIso8601String(),
-    'answers': answers,
+    'rank': rank,
+    'experimentsCompleted': experimentsCompleted,
   };
 }

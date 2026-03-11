@@ -4,8 +4,6 @@ import 'package:ar_chemistry_lab/models/experiment.dart';
 
 class ExperimentService {
   static final ExperimentService _instance = ExperimentService._internal();
-  late List<Experiment> _experiments = [];
-  late final Map<String, Experiment> _experimentsMap = {};
 
   factory ExperimentService() {
     return _instance;
@@ -13,30 +11,38 @@ class ExperimentService {
 
   ExperimentService._internal();
 
+  List<Experiment> _experiments = [];
+  bool _isLoaded = false;
+
+  List<Experiment> get experiments => _experiments;
+  bool get isLoaded => _isLoaded;
+
   Future<void> loadExperiments() async {
+    if (_isLoaded) return;
+
     try {
-      final String jsonString = await rootBundle.loadString('assets/experiments.json');
-      final jsonData = jsonDecode(jsonString);
+      final jsonString = await rootBundle.loadString('assets/experiments.json');
+      final jsonData = json.decode(jsonString);
       
-      _experiments = (jsonData['experiments'] as List)
-          .map((exp) => Experiment.fromJson(exp))
-          .toList();
-      
-      for (var exp in _experiments) {
-        _experimentsMap[exp.id.toString()] = exp;
+      if (jsonData is Map && jsonData['experiments'] is List) {
+        _experiments = (jsonData['experiments'] as List)
+            .map((exp) => Experiment.fromJson(exp as Map<String, dynamic>))
+            .toList();
       }
+      
+      _isLoaded = true;
     } catch (e) {
       print('Error loading experiments: $e');
-      _experiments = [];
+      _isLoaded = true;
     }
   }
 
-  List<Experiment> getAllExperiments() => _experiments;
-
-  Experiment? getExperimentById(int id) => _experimentsMap[id.toString()];
-
-  List<Experiment> getExperimentsByCategory(String category) {
-    return _experiments.where((exp) => exp.category == category).toList();
+  Experiment? getExperimentById(int id) {
+    try {
+      return _experiments.firstWhere((exp) => exp.id == id);
+    } catch (e) {
+      return null;
+    }
   }
 
   List<Experiment> getExperimentsByDifficulty(int difficulty) {
@@ -44,28 +50,16 @@ class ExperimentService {
   }
 
   List<Experiment> searchExperiments(String query) {
-    final lowerQuery = query.toLowerCase();
     return _experiments
         .where((exp) =>
-            exp.title.toLowerCase().contains(lowerQuery) ||
-            exp.description.toLowerCase().contains(lowerQuery) ||
-            exp.tags.any((tag) => tag.toLowerCase().contains(lowerQuery)))
+            exp.title.toLowerCase().contains(query.toLowerCase()) ||
+            exp.objective.toLowerCase().contains(query.toLowerCase()))
         .toList();
   }
 
-  List<String> getAllCategories() {
-    final categories = <String>{};
-    for (var exp in _experiments) {
-      categories.add(exp.category);
-    }
-    return categories.toList();
-  }
-
-  List<Experiment> getRecommendedExperiments(List<int> completedIds) {
+  List<Experiment> getUnlockedExperiments(List<int> completedIds) {
     return _experiments
-        .where((exp) => !completedIds.contains(exp.id))
-        .toList()
-        .take(5)
+        .where((exp) => !exp.isLocked || completedIds.contains(exp.id))
         .toList();
   }
 }

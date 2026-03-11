@@ -1,131 +1,167 @@
 import 'package:flutter/material.dart';
 import 'package:ar_chemistry_lab/services/audio_service.dart';
+import 'package:ar_chemistry_lab/services/ar_service.dart';
 
 class ReactionEngine {
+  static final ReactionEngine _instance = ReactionEngine._internal();
   static final AudioService _audioService = AudioService();
-  static final Map<String, ReactionEffect> _reactionEffects = {
-    'color_change': ReactionEffect(
-      name: 'Color Change',
-      duration: Duration(seconds: 3),
-      visualEffect: 'Gradual color transition',
-      sound: 'mix',
-    ),
-    'bubbles': ReactionEffect(
-      name: 'Gas Bubbles',
-      duration: Duration(seconds: 5),
-      visualEffect: 'Rising bubble animation',
-      sound: 'bubble',
-    ),
-    'precipitate': ReactionEffect(
-      name: 'Precipitate Formation',
-      duration: Duration(seconds: 4),
-      visualEffect: 'Particle settling animation',
-      sound: 'glass',
-    ),
-    'smoke': ReactionEffect(
-      name: 'Smoke Emission',
-      duration: Duration(seconds: 6),
-      visualEffect: 'Smoke particle effect',
-      sound: 'flame',
-    ),
-    'flame': ReactionEffect(
-      name: 'Flame Effect',
-      duration: Duration(seconds: 3),
-      visualEffect: 'Flame animation',
-      sound: 'flame',
-    ),
-    'heat_glow': ReactionEffect(
-      name: 'Heat Glow',
-      duration: Duration(seconds: 4),
-      visualEffect: 'Glowing animation',
-      sound: 'flame',
-    ),
-    'liquid_mixing': ReactionEffect(
-      name: 'Liquid Mixing',
-      duration: Duration(seconds: 3),
-      visualEffect: 'Swirling animation',
-      sound: 'pour',
-    ),
-  };
+  static final ARService _arService = ARService();
 
-  static Future<void> simulateReaction(
-    String effectType, {
-    VoidCallback? onComplete,
-    bool playSound = true,
-    bool haptic = true,
-  }) async {
-    final effect = _reactionEffects[effectType];
-    if (effect == null) return;
-
-    // Play sound
-    if (playSound) {
-      await _audioService.playSound(effect.sound);
-    }
-
-    // Haptic feedback
-    if (haptic) {
-      await _audioService.vibrateFeedback();
-    }
-
-    // Wait for animation duration
-    await Future.delayed(effect.duration);
-
-    // Callback when complete
-    onComplete?.call();
+  factory ReactionEngine() {
+    return _instance;
   }
 
-  static ReactionEffect? getReactionEffect(String effectType) {
-    return _reactionEffects[effectType];
-  }
+  ReactionEngine._internal();
 
-  static List<String> getAllReactionTypes() {
-    return _reactionEffects.keys.toList();
-  }
-
-  static Future<void> playChainReaction(List<String> effects) async {
-    for (var effect in effects) {
-      await simulateReaction(effect);
+  Future<void> simulateReaction(
+    String reactionType,
+    List<String> colors,
+    BuildContext context,
+  ) async {
+    switch (reactionType) {
+      case 'neutralization':
+        await _simulateNeutralization(colors, context);
+        break;
+      case 'precipitation':
+        await _simulatePrecipitation(colors, context);
+        break;
+      case 'gas':
+        await _simulateGasProduction(colors, context);
+        break;
+      case 'combustion':
+        await _simulateCombustion(colors, context);
+        break;
+      case 'oxidation':
+        await _simulateOxidation(colors, context);
+        break;
+      case 'decomposition':
+        await _simulateDecomposition(colors, context);
+        break;
+      case 'synthesis':
+        await _simulateSynthesis(colors, context);
+        break;
+      default:
+        break;
     }
   }
 
-  // Specific reaction simulations
-  static Future<void> simulateNeutralization() async {
-    await simulateReaction('color_change');
+  Future<void> _simulateNeutralization(List<String> colors, BuildContext context) async {
+    // Play neutralization sound
+    await _audioService.playSound('neutralization');
+    
+    // Vibration feedback
+    await _audioService.vibrate(duration: 200);
+    
+    // Visual feedback
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Neutralization: Colors change as acid meets base!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+    
+    // AR visual effect - color transitions
+    for (final color in colors) {
+      _arService.simulateReactionVisual('neutralization', colors: colors);
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
   }
 
-  static Future<void> simulatePrecipitation() async {
-    await playChainReaction(['color_change', 'precipitate']);
+  Future<void> _simulatePrecipitation(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('precipitation');
+    await _audioService.vibrate(duration: 150);
+    await _audioService.vibrate(duration: 150);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Precipitation: White solid particles form!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    _arService.simulateReactionVisual('precipitation', colors: colors);
   }
 
-  static Future<void> simulateGasProduction() async {
-    await playChainReaction(['bubbles', 'bubble']);
+  Future<void> _simulateGasProduction(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('bubbling');
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Gas Production: Bubbles are rising!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    // Simulate multiple pops for bubble effect
+    for (int i = 0; i < 5; i++) {
+      await _audioService.vibrate(duration: 100);
+      await Future.delayed(const Duration(milliseconds: 200));
+    }
+
+    _arService.simulateReactionVisual('gas', colors: colors);
   }
 
-  static Future<void> simulateCombustion() async {
-    await playChainReaction(['flame', 'smoke', 'heat_glow']);
+  Future<void> _simulateCombustion(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('combustion');
+    
+    for (int i = 0; i < 3; i++) {
+      await _audioService.vibrate(duration: 300);
+      await Future.delayed(const Duration(milliseconds: 100));
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Combustion: Bright flames and heat!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    _arService.simulateReactionVisual('combustion', colors: colors);
   }
 
-  static Future<void> simulateBloodredPrecipitate() async {
-    // Fe2+ + K3[Fe(CN)6] → Fe3[Fe(CN)6]2 (Prussian Blue)
-    await playChainReaction(['color_change', 'precipitate']);
+  Future<void> _simulateOxidation(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('oxidation');
+    await _audioService.vibrate(duration: 200);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Oxidation: Material changes color!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    _arService.simulateReactionVisual('oxidation', colors: colors);
   }
 
-  static Future<void> simulateExothermic() async {
-    // Exothermic reactions with heat and glow
-    await playChainReaction(['heat_glow', 'flame']);
+  Future<void> _simulateDecomposition(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('decomposition');
+
+    for (int i = 0; i < 4; i++) {
+      await _audioService.vibrate(duration: 100);
+      await Future.delayed(const Duration(milliseconds: 150));
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Decomposition: Compound breaks apart!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    _arService.simulateReactionVisual('decomposition', colors: colors);
   }
-}
 
-class ReactionEffect {
-  final String name;
-  final Duration duration;
-  final String visualEffect;
-  final String sound;
+  Future<void> _simulateSynthesis(List<String> colors, BuildContext context) async {
+    await _audioService.playSound('synthesis');
+    await _audioService.vibrate(duration: 200);
 
-  ReactionEffect({
-    required this.name,
-    required this.duration,
-    required this.visualEffect,
-    required this.sound,
-  });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Synthesis: New compound is formed!'),
+        duration: Duration(seconds: 2),
+      ),
+    );
+
+    _arService.simulateReactionVisual('synthesis', colors: colors);
+  }
 }

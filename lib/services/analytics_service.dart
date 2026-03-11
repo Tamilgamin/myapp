@@ -2,90 +2,111 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AnalyticsService {
   static final AnalyticsService _instance = AnalyticsService._internal();
-  late FirebaseFirestore _firestore;
 
   factory AnalyticsService() {
     return _instance;
   }
 
-  AnalyticsService._internal() {
-    _firestore = FirebaseFirestore.instance;
-  }
+  AnalyticsService._internal();
 
-  Future<void> logExperimentStart(int experimentId, String experimentTitle) async {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<void> logExperimentStarted(int experimentId, String title) async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'experiment_start',
+        'event': 'experiment_started',
         'experimentId': experimentId,
-        'experimentTitle': experimentTitle,
+        'title': title,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging experiment start: $e');
+      print('Error logging experiment started: $e');
     }
   }
 
-  Future<void> logExperimentComplete(int experimentId, int timeSpentSeconds) async {
+  Future<void> logExperimentCompleted(
+    int experimentId,
+    String title,
+    int points,
+    Duration duration,
+  ) async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'experiment_complete',
+        'event': 'experiment_completed',
         'experimentId': experimentId,
-        'timeSpent': timeSpentSeconds,
+        'title': title,
+        'points': points,
+        'durationSeconds': duration.inSeconds,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging experiment complete: $e');
+      print('Error logging experiment completed: $e');
     }
   }
 
-  Future<void> logQuizAttempt(int experimentId, int score, int totalQuestions) async {
+  Future<void> logQuizCompleted(
+    int experimentId,
+    int score,
+    int totalQuestions,
+  ) async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'quiz_attempt',
+        'event': 'quiz_completed',
         'experimentId': experimentId,
         'score': score,
         'totalQuestions': totalQuestions,
-        'percentage': (score / totalQuestions * 100).toStringAsFixed(2),
+        'percentage': (score / totalQuestions * 100).toStringAsFixed(1),
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging quiz attempt: $e');
+      print('Error logging quiz completed: $e');
     }
   }
 
-  Future<void> logAIQuery(String question) async {
+  Future<void> logARSessionStarted() async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'ai_query',
-        'question': question,
+        'event': 'ar_session_started',
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging AI query: $e');
+      print('Error logging AR session started: $e');
     }
   }
 
-  Future<void> logARView(int experimentId) async {
+  Future<void> logARSessionEnded(Duration duration) async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'ar_view',
-        'experimentId': experimentId,
+        'event': 'ar_session_ended',
+        'durationSeconds': duration.inSeconds,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging AR view: $e');
+      print('Error logging AR session ended: $e');
     }
   }
 
-  Future<void> logError(String errorMessage) async {
+  Future<void> logAIAssistantQuery(String query) async {
     try {
       await _firestore.collection('analytics').add({
-        'event': 'error',
-        'message': errorMessage,
+        'event': 'ai_assistant_query',
+        'query': query,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
-      print('Error logging error: $e');
+      print('Error logging AI assistant query: $e');
+    }
+  }
+
+  Future<void> logAdShown(String adType) async {
+    try {
+      await _firestore.collection('analytics').add({
+        'event': 'ad_shown',
+        'adType': adType,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+    } catch (e) {
+      print('Error logging ad shown: $e');
     }
   }
 }

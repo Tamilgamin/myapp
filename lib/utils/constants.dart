@@ -1,94 +1,83 @@
 class AppConstants {
-  // App info
+  // App information
   static const String appName = 'AR Chemistry Lab';
   static const String appVersion = '1.0.0';
-  
-  // Equipment types
-  static const List<String> equipmentTypes = [
-    'beaker',
-    'test_tube',
-    'conical_flask',
-    'burette',
-    'pipette',
-    'glass_rod',
-    'funnel',
-    'bunsen_burner',
-    'evaporating_dish',
-    'measuring_cylinder',
-    'tripod_stand',
-    'wire_gauze',
-    'test_tube_holder',
-    'reagent_bottle',
-  ];
 
-  // Reaction types
-  static const List<String> reactionTypes = [
-    'color_change',
-    'bubbles',
-    'precipitate',
-    'smoke',
-    'flame',
-    'heat_glow',
-    'liquid_mixing',
-  ];
+  // Spacings
+  static const double spacingXSmall = 4.0;
+  static const double spacingSmall = 8.0;
+  static const double spacingMedium = 16.0;
+  static const double spacingLarge = 24.0;
+  static const double spacingXLarge = 32.0;
 
-  // Experiment categories
-  static const List<String> categories = [
-    'Acid-Base Reactions',
-    'Redox Reactions',
-    'Precipitations',
-    'Gas Production',
-    'Combustion',
-    'Thermal Reactions',
-    'Oxidation-Reduction',
-    'Crystallization',
-    'Polymerization',
-    'Organic Chemistry',
-  ];
+  // Border radius
+  static const double borderRadiusSmall = 8.0;
+  static const double borderRadiusMedium = 12.0;
+  static const double borderRadiusLarge = 16.0;
 
-  // Difficulty levels
+  // Icon sizes
+  static const double iconSizeSmall = 16.0;
+  static const double iconSizeMedium = 24.0;
+  static const double iconSizeLarge = 32.0;
+  static const double iconSizeXLarge = 48.0;
+
+  // Text styles
+  static const double fontSizeSmall = 12.0;
+  static const double fontSizeMedium = 14.0;
+  static const double fontSizeLarge = 16.0;
+  static const double fontSizeXLarge = 18.0;
+  static const double fontSizeTitle = 24.0;
+  static const double fontSizeHeading = 32.0;
+
+  // Animation durations
+  static const Duration animationDurationShort = Duration(milliseconds: 200);
+  static const Duration animationDurationMedium = Duration(milliseconds: 400);
+  static const Duration animationDurationLong = Duration(milliseconds: 800);
+
+  // Experiment difficulty levels
   static const int difficultyEasy = 1;
   static const int difficultyMedium = 2;
   static const int difficultyHard = 3;
   static const int difficultyVeryHard = 4;
-  static const int difficultyExtreme = 5;
+  static const int difficultyExpert = 5;
 
-  // Rewards
-  static const int rewardEasyExperiment = 10;
-  static const int rewardMediumExperiment = 25;
-  static const int rewardHardExperiment = 50;
-  static const int rewardVeryHardExperiment = 100;
-  static const int rewardExtremeExperiment = 200;
-
-  static const int rewardQuizPerfect = 50;
-  static const int rewardQuizGood = 25;
-  static const int rewardQuizPassed = 10;
-
-  // Level thresholds
-  static const int level1Threshold = 0;
-  static const int level2Threshold = 500;
-  static const int level3Threshold = 1500;
-  static const int level4Threshold = 3000;
-  static const int level5Threshold = 5000;
-  static const int level6Threshold = 10000;
-
-  // AdMob IDs (Replace with your own)
-  static const String admobBannerId = 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyyyy';
-  static const String admobInterstitialId = 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyyyy';
-  static const String admobRewardedId = 'ca-app-pub-xxxxxxxxxxxxxxxx/yyyyyyyyyyyy';
+  // Points and scoring
+  static const int pointsPerExperiment = 10;
+  static const int pointsPerQuizQuestion = 5;
+  static const int pointsPerCorrectAnswer = 5;
+  static const int bonusPointsForCompletion = 20;
 
   // Firebase collections
   static const String firebaseUsersCollection = 'users';
-  static const String firebaseProgressCollection = 'progress';
+  static const String firebaseScoresCollection = 'scores';
   static const String firebaseAnalyticsCollection = 'analytics';
+  static const String firebaseLeaderboardCollection = 'leaderboard';
+}
 
-  // Shared preferences keys
-  static const String spKeyToken = 'auth_token';
-  static const String spKeyUserId = 'user_id';
-  static const String spKeyUsername = 'username';
-  static const String spKeyScore = 'score';
-  static const String spKeyCompletedExperiments = 'completed_experiments';
-  static const String spKeySoundEnabled = 'sound_enabled';
-  static const String spKeyVibrationEnabled = 'vibration_enabled';
-  static const String spKeyLastActivity = 'last_activity';
+class ReactionTypes {
+  static const String neutralization = 'neutralization';
+  static const String precipitation = 'precipitation';
+  static const String gas = 'gas';
+  static const String combustion = 'combustion';
+  static const String oxidation = 'oxidation';
+  static const String decomposition = 'decomposition';
+  static const String synthesis = 'synthesis';
+  static const String displacement = 'displacement';
+}
+
+class EquipmentTypes {
+  static const String container = 'container';
+  static const String heating = 'heating';
+  static const String measuring = 'measuring';
+  static const String mixing = 'mixing';
+  static const String holding = 'holding';
+}
+
+class AnimationTypes {
+  static const String pour = 'pour';
+  static const String burn = 'burn';
+  static const String mix = 'mix';
+  static const String heat = 'heat';
+  static const String bubble = 'bubble';
+  static const String smoke = 'smoke';
 }

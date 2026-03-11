@@ -1,429 +1,226 @@
-[
-  {
-    "id": 1,
-    "title": "Acid Base Neutralization",
-    "objective": "To observe the neutralization reaction between an acid and a base.",
-    "equipment": ["Beaker", "Pipette", "pH Meter"],
-    "chemicals": ["HCl", "NaOH", "Phenolphthalein"],
-    "procedure": [
-      "Add 10ml HCl to beaker",
-      "Add phenolphthalein indicator",
-      "Slowly add NaOH until color changes"
-    ],
-    "reaction": "HCl + NaOH → NaCl + H₂O",
-    "visualEffects": ["colorChange", "liquidMixing"],
-    "quiz": [
-      {
-        "question": "What is the product of neutralization?",
-        "options": ["Salt and Water", "Gas", "Precipitate"],
-        "answer": 0,
-        "explanation": "Neutralization produces salt and water."
-      }
-    ]
-  },
-  {
-    "id": 2,
-    "title": "Copper Sulphate Crystallization",
-    "objective": "To prepare copper sulphate crystals.",
-    "equipment": ["Beaker", "Bunsen Burner", "Evaporating Dish"],
-    "chemicals": ["Copper Sulphate"],
-    "procedure": [
-      "Dissolve copper sulphate in water",
-      "Heat to evaporate water",
-      "Allow to crystallize"
-    ],
-    "reaction": "CuSO₄·5H₂O → CuSO₄ + 5H₂O",
-    "visualEffects": ["heatGlow", "crystallization"],
-    "quiz": [
-      {
-        "question": "What color are copper sulphate crystals?",
-        "options": ["Blue", "White", "Green"],
-        "answer": 0,
-        "explanation": "Copper sulphate forms blue crystals."
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "title": "Electrolysis of Water",
-    "objective": "To decompose water into hydrogen and oxygen.",
-    "equipment": ["Beaker", "Electrodes", "Battery"],
-    "chemicals": ["Water", "Sulphuric Acid"],
-    "procedure": [
-      "Add water and acid to beaker",
-      "Connect electrodes to battery",
-      "Observe gas production"
-    ],
-    "reaction": "2H₂O → 2H₂ + O₂",
-    "visualEffects": ["gasBubbles", "spark"],
-    "quiz": [
-      {
-        "question": "What gases are produced?",
-        "options": ["Hydrogen and Oxygen", "Carbon Dioxide", "Nitrogen"],
-        "answer": 0,
-        "explanation": "Electrolysis of water produces hydrogen and oxygen."
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "title": "Heating Calcium Carbonate",
-    "objective": "To observe decomposition of calcium carbonate.",
-    "equipment": ["Test Tube", "Bunsen Burner"],
-    "chemicals": ["Calcium Carbonate"],
-    "procedure": [
-      "Place calcium carbonate in test tube",
-      "Heat strongly",
-      "Observe gas release"
-    ],
-    "reaction": "CaCO₃ → CaO + CO₂",
-    "visualEffects": ["gasBubbles", "heatGlow"],
-    "quiz": [
-      {
-        "question": "What gas is released?",
-        "options": ["Carbon Dioxide", "Oxygen", "Hydrogen"],
-        "answer": 0,
-        "explanation": "Calcium carbonate decomposes to release CO2."
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "title": "Flame Test",
-    "objective": "To identify metals by flame color.",
-    "equipment": ["Wire Loop", "Bunsen Burner"],
-    "chemicals": ["Sodium Chloride", "Potassium Chloride"],
-    "procedure": [
-      "Dip wire in salt solution",
-      "Heat in flame",
-      "Observe color"
-    ],
-    "reaction": "NaCl → Na⁺ + Cl⁻ (flame color)",
-    "visualEffects": ["flameColor"],
-    "quiz": [
-      {
-        "question": "What color does sodium produce?",
-        "options": ["Yellow", "Green", "Blue"],
-        "answer": 0,
-        "explanation": "Sodium gives a yellow flame."
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "title": "Precipitation Reaction",
-    "objective": "To observe precipitate formation.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Silver Nitrate", "Sodium Chloride"],
-    "procedure": [
-      "Mix silver nitrate and sodium chloride",
-      "Observe precipitate"
-    ],
-    "reaction": "AgNO₃ + NaCl → AgCl + NaNO₃",
-    "visualEffects": ["precipitate"],
-    "quiz": [
-      {
-        "question": "What is the precipitate?",
-        "options": ["AgCl", "NaCl", "NaNO3"],
-        "answer": 0,
-        "explanation": "Silver chloride is insoluble and forms precipitate."
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "title": "Titration of HCl with NaOH",
-    "objective": "To determine concentration by titration.",
-    "equipment": ["Burette", "Pipette", "Conical Flask"],
-    "chemicals": ["HCl", "NaOH", "Phenolphthalein"],
-    "procedure": [
-      "Fill burette with NaOH",
-      "Add HCl to flask with indicator",
-      "Titrate until color change"
-    ],
-    "reaction": "HCl + NaOH → NaCl + H₂O",
-    "visualEffects": ["colorChange"],
-    "quiz": [
-      {
-        "question": "What indicates the endpoint?",
-        "options": ["Color Change", "Gas Bubbles", "Heat"],
-        "answer": 0,
-        "explanation": "Phenolphthalein changes color at endpoint."
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "title": "Rusting of Iron",
-    "objective": "To observe rust formation.",
-    "equipment": ["Iron Nail", "Test Tube"],
-    "chemicals": ["Water", "Salt"],
-    "procedure": [
-      "Place iron nail in moist environment",
-      "Wait for rust"
-    ],
-    "reaction": "4Fe + 3O₂ → 2Fe₂O₃",
-    "visualEffects": ["rustFormation"],
-    "quiz": [
-      {
-        "question": "What is rust?",
-        "options": ["Iron Oxide", "Iron Sulphide", "Iron Chloride"],
-        "answer": 0,
-        "explanation": "Rust is iron(III) oxide."
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "title": "Reaction of Sodium with Water",
-    "objective": "To observe alkali metal reaction.",
-    "equipment": ["Beaker"],
-    "chemicals": ["Sodium", "Water"],
-    "procedure": [
-      "Add sodium to water",
-      "Observe reaction"
-    ],
-    "reaction": "2Na + 2H₂O → 2NaOH + H₂",
-    "visualEffects": ["gasBubbles", "heatGlow", "explosion"],
-    "quiz": [
-      {
-        "question": "What gas is produced?",
-        "options": ["Hydrogen", "Oxygen", "Carbon Dioxide"],
-        "answer": 0,
-        "explanation": "Sodium reacts with water to produce hydrogen."
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "title": "Carbon Dioxide Test using Limewater",
-    "objective": "To test for carbon dioxide.",
-    "equipment": ["Test Tube", "Delivery Tube"],
-    "chemicals": ["Vinegar", "Baking Soda", "Limewater"],
-    "procedure": [
-      "Generate CO2 from vinegar and baking soda",
-      "Bubble through limewater",
-      "Observe change"
-    ],
-    "reaction": "CO₂ + Ca(OH)₂ → CaCO₃ + H₂O",
-    "visualEffects": ["precipitate"],
-    "quiz": [
-      {
-        "question": "What happens to limewater?",
-        "options": ["Turns Milky", "Turns Blue", "No Change"],
-        "answer": 0,
-        "explanation": "CO2 turns limewater milky due to calcium carbonate."
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "title": "Preparation of Oxygen",
-    "objective": "To prepare oxygen gas.",
-    "equipment": ["Test Tube", "Delivery Tube"],
-    "chemicals": ["Hydrogen Peroxide", "Manganese Dioxide"],
-    "procedure": [
-      "Mix peroxide and manganese dioxide",
-      "Collect oxygen"
-    ],
-    "reaction": "2H₂O₂ → 2H₂O + O₂",
-    "visualEffects": ["gasBubbles"],
-    "quiz": [
-      {
-        "question": "What is the catalyst?",
-        "options": ["Manganese Dioxide", "Hydrogen Peroxide", "Water"],
-        "answer": 0,
-        "explanation": "MnO2 catalyzes the decomposition."
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "title": "Preparation of Hydrogen",
-    "objective": "To prepare hydrogen gas.",
-    "equipment": ["Flask", "Delivery Tube"],
-    "chemicals": ["Zinc", "Dilute Sulphuric Acid"],
-    "procedure": [
-      "Add zinc to acid",
-      "Collect hydrogen"
-    ],
-    "reaction": "Zn + H₂SO₄ → ZnSO₄ + H₂",
-    "visualEffects": ["gasBubbles"],
-    "quiz": [
-      {
-        "question": "What gas is produced?",
-        "options": ["Hydrogen", "Oxygen", "Carbon Dioxide"],
-        "answer": 0,
-        "explanation": "Zinc reacts with acid to produce hydrogen."
-      }
-    ]
-  },
-  {
-    "id": 13,
-    "title": "Test for Starch",
-    "objective": "To test for starch using iodine.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Starch Solution", "Iodine Solution"],
-    "procedure": [
-      "Add iodine to starch solution",
-      "Observe color change"
-    ],
-    "reaction": "Starch + I₂ → Blue Complex",
-    "visualEffects": ["colorChange"],
-    "quiz": [
-      {
-        "question": "What color indicates starch?",
-        "options": ["Blue-Black", "Yellow", "Red"],
-        "answer": 0,
-        "explanation": "Iodine gives blue-black color with starch."
-      }
-    ]
-  },
-  {
-    "id": 14,
-    "title": "Test for Carbon Dioxide",
-    "objective": "To test for CO2 using limewater.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Vinegar", "Baking Soda", "Limewater"],
-    "procedure": [
-      "Generate CO2",
-      "Bubble through limewater"
-    ],
-    "reaction": "CO₂ + Ca(OH)₂ → CaCO₃ + H₂O",
-    "visualEffects": ["precipitate"],
-    "quiz": [
-      {
-        "question": "What is the test for CO2?",
-        "options": ["Limewater Test", "Flame Test", "pH Test"],
-        "answer": 0,
-        "explanation": "Limewater turns milky with CO2."
-      }
-    ]
-  },
-  {
-    "id": 15,
-    "title": "Displacement Reaction",
-    "objective": "To observe metal displacement.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Copper Sulphate", "Zinc"],
-    "procedure": [
-      "Add zinc to copper sulphate solution",
-      "Observe changes"
-    ],
-    "reaction": "Zn + CuSO₄ → ZnSO₄ + Cu",
-    "visualEffects": ["precipitate", "colorChange"],
-    "quiz": [
-      {
-        "question": "What metal is displaced?",
-        "options": ["Copper", "Zinc", "Sulphur"],
-        "answer": 0,
-        "explanation": "Zinc displaces copper from its solution."
-      }
-    ]
-  },
-  {
-    "id": 16,
-    "title": "Reaction of Metals with Acids",
-    "objective": "To observe acid-metal reactions.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Magnesium", "Dilute HCl"],
-    "procedure": [
-      "Add magnesium to acid",
-      "Observe reaction"
-    ],
-    "reaction": "Mg + 2HCl → MgCl₂ + H₂",
-    "visualEffects": ["gasBubbles", "heatGlow"],
-    "quiz": [
-      {
-        "question": "What gas is evolved?",
-        "options": ["Hydrogen", "Oxygen", "Chlorine"],
-        "answer": 0,
-        "explanation": "Metals react with acids to produce hydrogen."
-      }
-    ]
-  },
-  {
-    "id": 17,
-    "title": "Decomposition of Hydrogen Peroxide",
-    "objective": "To observe catalytic decomposition.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Hydrogen Peroxide", "Potassium Iodide"],
-    "procedure": [
-      "Add catalyst to peroxide",
-      "Observe gas release"
-    ],
-    "reaction": "2H₂O₂ → 2H₂O + O₂",
-    "visualEffects": ["gasBubbles"],
-    "quiz": [
-      {
-        "question": "What is the product?",
-        "options": ["Oxygen", "Hydrogen", "Water"],
-        "answer": 0,
-        "explanation": "Decomposition produces oxygen gas."
-      }
-    ]
-  },
-  {
-    "id": 18,
-    "title": "Formation of Ammonium Chloride",
-    "objective": "To prepare ammonium chloride.",
-    "equipment": ["Flask", "Funnel"],
-    "chemicals": ["Ammonia", "HCl"],
-    "procedure": [
-      "Mix ammonia and HCl gases",
-      "Collect solid"
-    ],
-    "reaction": "NH₃ + HCl → NH₄Cl",
-    "visualEffects": ["smoke", "precipitate"],
-    "quiz": [
-      {
-        "question": "What is formed?",
-        "options": ["White Solid", "Gas", "Liquid"],
-        "answer": 0,
-        "explanation": "Ammonium chloride is a white solid."
-      }
-    ]
-  },
-  {
-    "id": 19,
-    "title": "Reaction of Iron with Sulphur",
-    "objective": "To form iron sulphide.",
-    "equipment": ["Test Tube"],
-    "chemicals": ["Iron Filings", "Sulphur"],
-    "procedure": [
-      "Mix iron and sulphur",
-      "Heat mixture"
-    ],
-    "reaction": "Fe + S → FeS",
-    "visualEffects": ["heatGlow"],
-    "quiz": [
-      {
-        "question": "What compound is formed?",
-        "options": ["Iron Sulphide", "Iron Oxide", "Sulphur Dioxide"],
-        "answer": 0,
-        "explanation": "Iron and sulphur form iron sulphide."
-      }
-    ]
-  },
-  {
-    "id": 20,
-    "title": "Burning of Magnesium",
-    "objective": "To observe combustion of magnesium.",
-    "equipment": ["Tongs"],
-    "chemicals": ["Magnesium Ribbon"],
-    "procedure": [
-      "Burn magnesium ribbon",
-      "Observe product"
-    ],
-    "reaction": "2Mg + O₂ → 2MgO",
-    "visualEffects": ["flame", "ash"],
-    "quiz": [
-      {
-        "question": "What is the product?",
-        "options": ["Magnesium Oxide", "Magnesium Sulphide", "Magnesium Chloride"],
-        "answer": 0,
-        "explanation": "Magnesium burns to form magnesium oxide."
-      }
-    ]
-  }
-]
+{
+  "experiments": [
+    {
+      "id": 1,
+      "title": "Acid-Base Neutralization",
+      "objective": "Understand how acids and bases react to form neutral compounds",
+      "description": "Mix hydrochloric acid and sodium hydroxide to observe a neutralization reaction",
+      "equipmentList": ["Beaker", "Measuring Cylinder", "Glass Rod", "Thermometer"],
+      "chemicalsUsed": ["Hydrochloric Acid", "Sodium Hydroxide"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Pour 50ml of HCl into the beaker", "equipment": ["Measuring Cylinder", "Beaker"], "expectedOutcome": "Clear acidic solution", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Add NaOH drop by drop while stirring", "equipment": ["Glass Rod", "Pipette"], "expectedOutcome": "Temperature increases, solution gets warm", "animation": "mix"}
+      ],
+      "reactionEquation": "HCl + NaOH → NaCl + H2O + Heat",
+      "safetyNotes": ["Wear safety goggles", "Use gloves when handling chemicals", "Work in well-ventilated area"],
+      "reactionType": "neutralization",
+      "colors": ["FF4081", "FFEB3B", "FFFFFF"],
+      "quizQuestions": [
+        {"question": "What is the pH of a neutral solution?", "options": ["0", "7", "14", "10"], "correctAnswerIndex": 1, "explanation": "A neutral solution has a pH of 7"}
+      ],
+      "difficulty": 1,
+      "pointsReward": 50,
+      "isLocked": false
+    },
+    {
+      "id": 2,
+      "title": "Precipitation Reaction",
+      "objective": "Observe the formation of a precipitate when two solutions mix",
+      "description": "Mix silver nitrate and sodium chloride to form insoluble silver chloride",
+      "equipmentList": ["Test Tube", "Measuring Cylinder", "Glass Rod", "Pipette"],
+      "chemicalsUsed": ["Silver Nitrate", "Sodium Chloride"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Add 10ml of AgNO3 solution to test tube", "equipment": ["Measuring Cylinder", "Test Tube"], "expectedOutcome": "Clear colorless solution", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Slowly add NaCl solution while stirring", "equipment": ["Pipette", "Glass Rod"], "expectedOutcome": "White precipitate forms", "animation": "mix"}
+      ],
+      "reactionEquation": "AgNO3 + NaCl → AgCl + NaNO3",
+      "safetyNotes": ["Silver nitrate stains skin", "Wear gloves and apron", "Dispose properly"],
+      "reactionType": "precipitation",
+      "colors": ["E3F2FD", "F5F5F5", "FFFFFF"],
+      "quizQuestions": [
+        {"question": "What is the white precipitate formed?", "options": ["NaCl", "AgCl", "AgNO3", "Na2Cl"], "correctAnswerIndex": 1, "explanation": "Silver chloride (AgCl) is the white precipitate"}
+      ],
+      "difficulty": 1,
+      "pointsReward": 50,
+      "isLocked": false
+    },
+    {
+      "id": 3,
+      "title": "Gas Production from Acid-Carbonate",
+      "objective": "Observe CO2 gas production from acid-carbonate reaction",
+      "description": "Mix hydrochloric acid with calcium carbonate to produce bubbles of CO2",
+      "equipmentList": ["Beaker", "Test Tube", "Gas Delivery Tube", "Measuring Cylinder"],
+      "chemicalsUsed": ["Hydrochloric Acid", "Calcium Carbonate"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Add CaCO3 powder to test tube with HCl", "equipment": ["Test Tube", "Measuring Cylinder"], "expectedOutcome": "Vigorous bubbling of gas", "animation": "bubble"},
+        {"stepNumber": 2, "instruction": "Insert gas delivery tube and collect gas", "equipment": ["Gas Delivery Tube"], "expectedOutcome": "Gas flows through tube", "animation": "none"}
+      ],
+      "reactionEquation": "2HCl + CaCO3 → CaCl2 + H2O + CO2",
+      "safetyNotes": ["Avoid breathing the gas", "Use fume hood if available", "Control reaction with dropper"],
+      "reactionType": "gas",
+      "colors": ["FFECB3", "FFF9C4", "FFFFFF"],
+      "quizQuestions": [
+        {"question": "What gas is produced?", "options": ["O2", "N2", "CO2", "H2"], "correctAnswerIndex": 2, "explanation": "Carbon dioxide (CO2) gas is produced"}
+      ],
+      "difficulty": 1,
+      "pointsReward": 50,
+      "isLocked": false
+    },
+    {
+      "id": 4,
+      "title": "Combustion of Magnesium",
+      "objective": "Observe the bright combustion of magnesium metal",
+      "description": "Burn magnesium ribbon and observe the bright white light and white powder",
+      "equipmentList": ["Magnesium Ribbon", "Bunsen Burner", "Tongs", "Evaporating Dish"],
+      "chemicalsUsed": ["Magnesium", "Oxygen"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Hold Mg ribbon with tongs over Bunsen burner", "equipment": ["Tongs", "Bunsen Burner"], "expectedOutcome": "Bright white light", "animation": "burn"},
+        {"stepNumber": 2, "instruction": "Let ash fall into evaporating dish", "equipment": ["Evaporating Dish"], "expectedOutcome": "White powder collects", "animation": "none"}
+      ],
+      "reactionEquation": "2Mg + O2 → 2MgO",
+      "safetyNotes": ["Do not look directly at the flame", "Wear heat-resistant gloves", "Never touch with hands", "Keep water away"],
+      "reactionType": "combustion",
+      "colors": ["FFFFFF", "F3E5F5", "FFE082"],
+      "quizQuestions": [
+        {"question": "What color is the flame when Mg burns?", "options": ["Yellow", "Blue", "Bright white", "Red"], "correctAnswerIndex": 2, "explanation": "Magnesium burns with a bright white flame"}
+      ],
+      "difficulty": 2,
+      "pointsReward": 75,
+      "isLocked": false
+    },
+    {
+      "id": 5,
+      "title": "Copper Oxidation by Heat",
+      "objective": "Observe how copper reacts with oxygen when heated",
+      "description": "Heat copper foil and observe how it reacts with oxygen to form copper oxide",
+      "equipmentList": ["Copper Foil", "Bunsen Burner", "Crucible Tongs", "Crucible"],
+      "chemicalsUsed": ["Copper", "Oxygen"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Place copper foil in crucible", "equipment": ["Crucible", "Copper Foil"], "expectedOutcome": "Copper foil arranged loosely", "animation": "none"},
+        {"stepNumber": 2, "instruction": "Heat with Bunsen burner for 2-3 minutes", "equipment": ["Bunsen Burner", "Crucible Tongs"], "expectedOutcome": "Copper turns black", "animation": "heat"}
+      ],
+      "reactionEquation": "2Cu + O2 → 2CuO",
+      "safetyNotes": ["Use tongs to handle hot materials", "Let materials cool before touching", "Work over heatproof surface"],
+      "reactionType": "oxidation",
+      "colors": ["FFB74D", "FF8A65", "424242"],
+      "quizQuestions": [
+        {"question": "What color is copper oxide?", "options": ["Red", "Blue", "Black", "Yellow"], "correctAnswerIndex": 2, "explanation": "Copper oxide (CuO) is black"}
+      ],
+      "difficulty": 2,
+      "pointsReward": 75,
+      "isLocked": false
+    },
+    {
+      "id": 6,
+      "title": "Sodium and Water Reaction",
+      "objective": "Observe the vigorous reaction between sodium metal and water",
+      "description": "Drop a small piece of sodium into water and observe the reaction",
+      "equipmentList": ["Sodium Metal", "Beaker", "Water", "Tweezers", "Phenolphthalein"],
+      "chemicalsUsed": ["Sodium", "Water"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Fill beaker with water", "equipment": ["Beaker", "Water"], "expectedOutcome": "Clear water", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Add phenolphthalein drop", "equipment": ["Phenolphthalein"], "expectedOutcome": "Water remains colorless", "animation": "mix"},
+        {"stepNumber": 3, "instruction": "Drop sodium piece using tweezers", "equipment": ["Tweezers", "Sodium Metal"], "expectedOutcome": "Vigorous reaction, heat, buzzing", "animation": "bubble"}
+      ],
+      "reactionEquation": "2Na + 2H2O → 2NaOH + H2",
+      "safetyNotes": ["Use tweezers only", "Wear safety goggles", "Keep sodium under mineral oil", "Hydrogen is flammable"],
+      "reactionType": "combustion",
+      "colors": ["FF5722", "FFF9C4", "FFFFFF"],
+      "quizQuestions": [
+        {"question": "What does phenolphthalein indicate?", "options": ["Acid", "Base", "Neutral", "No change"], "correctAnswerIndex": 1, "explanation": "Phenolphthalein turns pink in basic solutions"}
+      ],
+      "difficulty": 3,
+      "pointsReward": 100,
+      "isLocked": true
+    },
+    {
+      "id": 7,
+      "title": "Iodine and Starch Test",
+      "objective": "Observe the color change when iodine reacts with starch",
+      "description": "Add iodine solution to starch solution and observe blue-black color",
+      "equipmentList": ["Test Tube", "Iodine Solution", "Starch Solution", "Measuring Cylinder", "Pipette"],
+      "chemicalsUsed": ["Iodine", "Starch"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Add 10ml of starch solution to test tube", "equipment": ["Test Tube", "Measuring Cylinder"], "expectedOutcome": "White/opaque solution", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Add drops of iodine solution", "equipment": ["Pipette", "Iodine Solution"], "expectedOutcome": "Blue-black precipitate forms", "animation": "mix"}
+      ],
+      "reactionEquation": "I2 + Starch → Blue-Black Complex",
+      "safetyNotes": ["Iodine is corrosive", "Avoid skin contact", "Do not ingest", "Use gloves"],
+      "reactionType": "precipitation",
+      "colors": ["FFFFFF", "E8EAF6", "6A1B9A"],
+      "quizQuestions": [
+        {"question": "What color forms with iodine and starch?", "options": ["Brown", "Yellow", "Blue-black", "Pink"], "correctAnswerIndex": 2, "explanation": "A blue-black complex forms"}
+      ],
+      "difficulty": 1,
+      "pointsReward": 50,
+      "isLocked": false
+    },
+    {
+      "id": 8,
+      "title": "Phenolphthalein and Base",
+      "objective": "Observe pH indicator color change with base",
+      "description": "Add NaOH to phenolphthalein and observe color change",
+      "equipmentList": ["Test Tube", "Phenolphthalein", "NaOH Solution", "Measuring Cylinder", "Dropper"],
+      "chemicalsUsed": ["Phenolphthalein", "Sodium Hydroxide"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Add 10ml water to test tube", "equipment": ["Test Tube", "Measuring Cylinder"], "expectedOutcome": "Clear water", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Add phenolphthalein drops", "equipment": ["Dropper", "Phenolphthalein"], "expectedOutcome": "Colorless solution", "animation": "mix"},
+        {"stepNumber": 3, "instruction": "Add NaOH drop by drop", "equipment": ["Dropper", "NaOH Solution"], "expectedOutcome": "Solution turns pink", "animation": "mix"}
+      ],
+      "reactionEquation": "Phenolphthalein + Base → Pink Color",
+      "safetyNotes": ["Phenolphthalein is a laxative", "NaOH is caustic", "Avoid skin contact", "Wear gloves"],
+      "reactionType": "neutralization",
+      "colors": ["FFFFFF", "F3E5F5", "E91E63"],
+      "quizQuestions": [
+        {"question": "What color in base?", "options": ["Yellow", "Pink", "Blue", "Green"], "correctAnswerIndex": 1, "explanation": "Phenolphthalein turns pink in basic solutions"}
+      ],
+      "difficulty": 1,
+      "pointsReward": 50,
+      "isLocked": false
+    },
+    {
+      "id": 9,
+      "title": "Iron and Sulfur Reaction",
+      "objective": "Observe a combination reaction between iron and sulfur",
+      "description": "Heat a mixture of iron powder and sulfur to form iron sulfide",
+      "equipmentList": ["Iron Powder", "Sulfur Powder", "Evaporating Dish", "Bunsen Burner", "Stirring Rod"],
+      "chemicalsUsed": ["Iron", "Sulfur"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Mix iron powder with sulfur in dish", "equipment": ["Iron Powder", "Sulfur Powder", "Evaporating Dish"], "expectedOutcome": "Mixture of reddish powder", "animation": "mix"},
+        {"stepNumber": 2, "instruction": "Heat while stirring", "equipment": ["Bunsen Burner", "Stirring Rod"], "expectedOutcome": "Mixture glows red", "animation": "heat"}
+      ],
+      "reactionEquation": "Fe + S → FeS",
+      "safetyNotes": ["Good ventilation needed", "Don't inhale fumes", "Wear heat-resistant gloves", "Allow to cool before handling"],
+      "reactionType": "synthesis",
+      "colors": ["FF6F00", "FF8A50", "424242"],
+      "quizQuestions": [
+        {"question": "What color is FeS?", "options": ["Red", "Yellow", "Black", "Brown"], "correctAnswerIndex": 2, "explanation": "Iron sulfide (FeS) is black"}
+      ],
+      "difficulty": 2,
+      "pointsReward": 75,
+      "isLocked": false
+    },
+    {
+      "id": 10,
+      "title": "Copper Displacement by Iron",
+      "objective": "Observe displacement of copper by more reactive metal",
+      "description": "Add iron to copper sulfate solution to observe copper displacement",
+      "equipmentList": ["Test Tube", "Iron Powder", "Copper Sulfate Solution", "Measuring Cylinder", "Spatula"],
+      "chemicalsUsed": ["Iron", "Copper Sulfate"],
+      "procedureSteps": [
+        {"stepNumber": 1, "instruction": "Add 20ml CuSO4 solution to test tube", "equipment": ["Test Tube", "Measuring Cylinder"], "expectedOutcome": "Blue solution", "animation": "pour"},
+        {"stepNumber": 2, "instruction": "Add iron powder with spatula", "equipment": ["Spatula", "Iron Powder"], "expectedOutcome": "Orange/brown color forms", "animation": "mix"}
+      ],
+      "reactionEquation": "Fe + CuSO4 → FeSO4 + Cu",
+      "safetyNotes": ["CuSO4 is toxic", "Avoid ingestion", "Wear gloves and goggles", "Wash hands afterwards"],
+      "reactionType": "displacement",
+      "colors": ["42A5F5", "EF5350", "FFB300"],
+      "quizQuestions": [
+        {"question": "Why does iron displace copper?", "options": ["Less reactive", "More reactive", "Same", "No reason"], "correctAnswerIndex": 1, "explanation": "Iron is more reactive than copper"}
+      ],
+      "difficulty": 2,
+      "pointsReward": 75,
+      "isLocked": false
+    }
+  ]
+}

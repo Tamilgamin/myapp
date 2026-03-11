@@ -1,11 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:vibration/vibration.dart';
 
 class AudioService {
   static final AudioService _instance = AudioService._internal();
-  late AudioPlayer _audioPlayer;
-  late bool _soundEnabled = true;
-  late bool _vibrationEnabled = true;
 
   factory AudioService() {
     return _instance;
@@ -13,6 +11,68 @@ class AudioService {
 
   AudioService._internal() {
     _audioPlayer = AudioPlayer();
+    _tts = FlutterTts();
+    _initTTS();
+  }
+
+  late AudioPlayer _audioPlayer;
+  late FlutterTts _tts;
+  bool _soundEnabled = true;
+  bool _vibrationEnabled = true;
+
+  void _initTTS() {
+    _tts.setLanguage('en-US');
+    _tts.setSpeechRate(0.5);
+    _tts.setVolume(1.0);
+    _tts.setPitch(1.0);
+  }
+
+  Future<void> playSound(String soundName) async {
+    if (!_soundEnabled) return;
+    
+    try {
+      await _audioPlayer.play(AssetSource('sounds/$soundName.wav'));
+    } catch (e) {
+      print('Error playing sound: $e');
+    }
+  }
+
+  Future<void> playSoundUrl(String url) async {
+    if (!_soundEnabled) return;
+    
+    try {
+      await _audioPlayer.play(UrlSource(url));
+    } catch (e) {
+      print('Error playing sound from URL: $e');
+    }
+  }
+
+  Future<void> speak(String text) async {
+    try {
+      await _tts.speak(text);
+    } catch (e) {
+      print('Error speaking: $e');
+    }
+  }
+
+  Future<void> stopSpeech() async {
+    await _tts.stop();
+  }
+
+  Future<void> vibrate({int duration = 100}) async {
+    if (!_vibrationEnabled) return;
+    
+    if (await Vibration.hasVibrator() ?? false) {
+      await Vibration.vibrate(duration: duration);
+    }
+  }
+
+  Future<void> vibratePattern(List<int> pattern) async {
+    if (!_vibrationEnabled) return;
+    
+    if (await Vibration.hasVibrator() ?? false) {
+      await Vibration.vibrate(pattern: pattern);
+    }
   }
 
   void setSoundEnabled(bool enabled) {
@@ -23,52 +83,13 @@ class AudioService {
     _vibrationEnabled = enabled;
   }
 
-  bool get soundEnabled => _soundEnabled;
-  bool get vibrationEnabled => _vibrationEnabled;
-
-  Future<void> playSound(String soundFile) async {
-    if (_soundEnabled) {
-      try {
-        await _audioPlayer.play(AssetSource('sounds/$soundFile.mp3'));
-      } catch (e) {
-        print('Error playing sound: $e');
-      }
-    }
+  Future<void> stopAllAudio() async {
+    await _audioPlayer.stop();
+    await stopSpeech();
   }
 
-  Future<void> playBubbleSound() => playSound('bubble');
-  Future<void> playPourSound() => playSound('pour');
-  Future<void> playFlameSound() => playSound('flame');
-  Future<void> playGlassSound() => playSound('glass');
-  Future<void> playMixSound() => playSound('mix');
-  Future<void> playSuccessSound() => playSound('success');
-  Future<void> playFailSound() => playSound('fail');
-
-  Future<void> vibrate({int durationMs = 500}) async {
-    if (_vibrationEnabled) {
-      if (await Vibration.hasVibrator() ?? false) {
-        await Vibration.vibrate(duration: durationMs);
-      }
-    }
+  Future<void> dispose() async {
+    await _audioPlayer.dispose();
+    await _tts.stop();
   }
-
-  Future<void> vibrateFeedback() => vibrate(durationMs: 200);
-
-  Future<void> vibrateSuccess() async {
-    if (_vibrationEnabled) {
-      if (await Vibration.hasVibrator() ?? false) {
-        await Vibration.vibrate(pattern: [0, 100, 100, 100]);
-      }
-    }
-  }
-
-  Future<void> vibrateError() async {
-    if (_vibrationEnabled) {
-      if (await Vibration.hasVibrator() ?? false) {
-        await Vibration.vibrate(pattern: [0, 200, 100, 200]);
-      }
-    }
-  }
-
-  Future<void> stop() => _audioPlayer.stop();
 }
