@@ -36,9 +36,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/experiments.json
-    - assets/sounds/
-    - assets/models/
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Regular.ttf

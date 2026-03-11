@@ -1,167 +1,224 @@
 import 'package:flutter/material.dart';
-import 'package:ar_chemistry_lab/services/audio_service.dart';
-import 'package:ar_chemistry_lab/services/ar_service.dart';
+
+enum ReactionEffectType {
+  colorChange,
+  gasBubbles,
+  precipitate,
+  liquidMixing,
+  smokeEmission,
+  heatGlow,
+  flame,
+  spark,
+}
+
+class ReactionEffect {
+  final ReactionEffectType type;
+  final Color startColor;
+  final Color endColor;
+  final Duration duration;
+  final VoidCallback? onComplete;
+
+  ReactionEffect({
+    required this.type,
+    this.startColor = Colors.transparent,
+    this.endColor = Colors.transparent,
+    this.duration = const Duration(seconds: 2),
+    this.onComplete,
+  });
+}
 
 class ReactionEngine {
-  static final ReactionEngine _instance = ReactionEngine._internal();
-  static final AudioService _audioService = AudioService();
-  static final ARService _arService = ARService();
+  static final Map<String, List<ReactionEffect>> reactionEffects = {
+    'HCl_NaOH': [
+      // Neutralization: Color change from red to colorless
+      ReactionEffect(
+        type: ReactionEffectType.colorChange,
+        startColor: Color.fromARGB(255, 255, 100, 100),
+        endColor: Colors.transparent,
+        duration: Duration(seconds: 3),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.liquidMixing,
+        duration: Duration(seconds: 2),
+      ),
+    ],
+    'AgNO3_NaCl': [
+      // Precipitation: White solid forms
+      ReactionEffect(
+        type: ReactionEffectType.precipitate,
+        startColor: Colors.transparent,
+        endColor: Colors.white,
+        duration: Duration(seconds: 2),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.gasBubbles,
+        duration: Duration(seconds: 3),
+      ),
+    ],
+    'Mg_O2': [
+      // Combustion: Flame and heat glow
+      ReactionEffect(
+        type: ReactionEffectType.flame,
+        startColor: Colors.yellow,
+        endColor: Colors.red,
+        duration: Duration(seconds: 4),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.heatGlow,
+        startColor: Colors.orange,
+        endColor: Colors.transparent,
+        duration: Duration(seconds: 3),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.spark,
+        duration: Duration(seconds: 3),
+      ),
+    ],
+    'CaCO3_decomposition': [
+      // Thermal decomposition: Smoke and gas
+      ReactionEffect(
+        type: ReactionEffectType.smokeEmission,
+        startColor: Color.fromARGB(128, 128, 128, 128),
+        endColor: Colors.transparent,
+        duration: Duration(seconds: 4),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.gasBubbles,
+        duration: Duration(seconds: 3),
+      ),
+    ],
+    'Fe_CuSO4': [
+      // Displacement: Color change and precipitate
+      ReactionEffect(
+        type: ReactionEffectType.colorChange,
+        startColor: Colors.blue,
+        endColor: Colors.teal,
+        duration: Duration(seconds: 2),
+      ),
+      ReactionEffect(
+        type: ReactionEffectType.precipitate,
+        startColor: Colors.transparent,
+        endColor: Colors.brown,
+        duration: Duration(seconds: 3),
+      ),
+    ],
+  };
 
-  factory ReactionEngine() {
-    return _instance;
+  /// Simulate a chemical reaction with visual effects
+  static Future<void> simulateReaction(
+    String reactionId,
+    BuildContext context, {
+    VoidCallback? onReactionComplete,
+  }) async {
+    final effects = reactionEffects[reactionId] ?? [];
+
+    for (final effect in effects) {
+      await _playEffect(effect, context);
+    }
+
+    onReactionComplete?.call();
   }
 
-  ReactionEngine._internal();
-
-  Future<void> simulateReaction(
-    String reactionType,
-    List<String> colors,
+  /// Play a single reaction effect
+  static Future<void> _playEffect(
+    ReactionEffect effect,
     BuildContext context,
   ) async {
-    switch (reactionType) {
-      case 'neutralization':
-        await _simulateNeutralization(colors, context);
-        break;
-      case 'precipitation':
-        await _simulatePrecipitation(colors, context);
-        break;
-      case 'gas':
-        await _simulateGasProduction(colors, context);
-        break;
-      case 'combustion':
-        await _simulateCombustion(colors, context);
-        break;
-      case 'oxidation':
-        await _simulateOxidation(colors, context);
-        break;
-      case 'decomposition':
-        await _simulateDecomposition(colors, context);
-        break;
-      case 'synthesis':
-        await _simulateSynthesis(colors, context);
-        break;
-      default:
-        break;
+    try {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_getEffectDescription(effect.type)),
+          duration: effect.duration,
+          backgroundColor: _getEffectColor(effect.type),
+        ),
+      );
+
+      await Future.delayed(effect.duration);
+      effect.onComplete?.call();
+    } catch (e) {
+      debugPrint('Error playing reaction effect: $e');
     }
   }
 
-  Future<void> _simulateNeutralization(List<String> colors, BuildContext context) async {
-    // Play neutralization sound
-    await _audioService.playSound('neutralization');
-    
-    // Vibration feedback
-    await _audioService.vibrate(duration: 200);
-    
-    // Visual feedback
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Neutralization: Colors change as acid meets base!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-    
-    // AR visual effect - color transitions
-    for (final color in colors) {
-      _arService.simulateReactionVisual('neutralization', colors: colors);
-      await Future.delayed(const Duration(milliseconds: 500));
+  /// Get description text for effect type
+  static String _getEffectDescription(ReactionEffectType type) {
+    switch (type) {
+      case ReactionEffectType.colorChange:
+        return '🎨 Color changes during reaction...';
+      case ReactionEffectType.gasBubbles:
+        return '💨 Gas bubbles forming...';
+      case ReactionEffectType.precipitate:
+        return '⚪ Solid precipitate forming...';
+      case ReactionEffectType.liquidMixing:
+        return '🌊 Liquids mixing...';
+      case ReactionEffectType.smokeEmission:
+        return '💨 Smoke emitted...';
+      case ReactionEffectType.heatGlow:
+        return '🔥 Heat released...';
+      case ReactionEffectType.flame:
+        return '🔥 Flame produced...';
+      case ReactionEffectType.spark:
+        return '✨ Sparks emitted...';
     }
   }
 
-  Future<void> _simulatePrecipitation(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('precipitation');
-    await _audioService.vibrate(duration: 150);
-    await _audioService.vibrate(duration: 150);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Precipitation: White solid particles form!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    _arService.simulateReactionVisual('precipitation', colors: colors);
-  }
-
-  Future<void> _simulateGasProduction(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('bubbling');
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Gas Production: Bubbles are rising!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    // Simulate multiple pops for bubble effect
-    for (int i = 0; i < 5; i++) {
-      await _audioService.vibrate(duration: 100);
-      await Future.delayed(const Duration(milliseconds: 200));
+  /// Get color for effect type
+  static Color _getEffectColor(ReactionEffectType type) {
+    switch (type) {
+      case ReactionEffectType.colorChange:
+        return Colors.purple;
+      case ReactionEffectType.gasBubbles:
+        return Colors.cyan;
+      case ReactionEffectType.precipitate:
+        return Colors.blue;
+      case ReactionEffectType.liquidMixing:
+        return Colors.teal;
+      case ReactionEffectType.smokeEmission:
+        return Colors.grey;
+      case ReactionEffectType.heatGlow:
+        return Colors.orange;
+      case ReactionEffectType.flame:
+        return Colors.red;
+      case ReactionEffectType.spark:
+        return Colors.yellow;
     }
-
-    _arService.simulateReactionVisual('gas', colors: colors);
   }
 
-  Future<void> _simulateCombustion(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('combustion');
-    
-    for (int i = 0; i < 3; i++) {
-      await _audioService.vibrate(duration: 300);
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
+  /// Get reaction information
+  static Map<String, dynamic> getReactionInfo(String reactionId) {
+    final reactionMap = {
+      'HCl_NaOH': {
+        'equation': 'HCl + NaOH → NaCl + H₂O',
+        'type': 'Neutralization',
+        'productState': 'Colorless solution',
+      },
+      'AgNO3_NaCl': {
+        'equation': 'AgNO₃ + NaCl → AgCl↓ + NaNO₃',
+        'type': 'Precipitation',
+        'productState': 'White precipitate',
+      },
+      'Mg_O2': {
+        'equation': '2Mg + O₂ → 2MgO',
+        'type': 'Combustion',
+        'productState': 'White solid (MgO)',
+      },
+      'CaCO3_decomposition': {
+        'equation': 'CaCO₃ → CaO + CO₂↑',
+        'type': 'Thermal Decomposition',
+        'productState': 'White solid + gas',
+      },
+      'Fe_CuSO4': {
+        'equation': 'Fe + CuSO₄ → FeSO₄ + Cu',
+        'type': 'Displacement',
+        'productState': 'Brown copper deposit',
+      },
+    };
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Combustion: Bright flames and heat!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    _arService.simulateReactionVisual('combustion', colors: colors);
-  }
-
-  Future<void> _simulateOxidation(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('oxidation');
-    await _audioService.vibrate(duration: 200);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Oxidation: Material changes color!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    _arService.simulateReactionVisual('oxidation', colors: colors);
-  }
-
-  Future<void> _simulateDecomposition(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('decomposition');
-
-    for (int i = 0; i < 4; i++) {
-      await _audioService.vibrate(duration: 100);
-      await Future.delayed(const Duration(milliseconds: 150));
-    }
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Decomposition: Compound breaks apart!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    _arService.simulateReactionVisual('decomposition', colors: colors);
-  }
-
-  Future<void> _simulateSynthesis(List<String> colors, BuildContext context) async {
-    await _audioService.playSound('synthesis');
-    await _audioService.vibrate(duration: 200);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Synthesis: New compound is formed!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-
-    _arService.simulateReactionVisual('synthesis', colors: colors);
+    return reactionMap[reactionId] ??
+        {
+          'equation': 'Unknown reaction',
+          'type': 'Unknown',
+          'productState': 'Unknown',
+        };
   }
 }

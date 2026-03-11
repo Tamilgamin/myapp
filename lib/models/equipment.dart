@@ -32,7 +32,7 @@ class Equipment {
   };
 }
 
-const List<Equipment> defaultEquipment = [
+final List<Equipment> defaultEquipment = [
   Equipment(
     id: 'beaker',
     name: 'Beaker',

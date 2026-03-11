@@ -3,23 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ar_chemistry_lab/screens/home_screen.dart';
 import 'package:ar_chemistry_lab/services/app_state.dart';
-import 'package:ar_chemistry_lab/services/experiment_service.dart';
-import 'package:ar_chemistry_lab/services/ar_service.dart';
-import 'package:ar_chemistry_lab/services/audio_service.dart';
 import 'package:ar_chemistry_lab/services/ai_service.dart';
-import 'package:ar_chemistry_lab/services/analytics_service.dart';
+import 'package:ar_chemistry_lab/services/ar_service.dart';
+import 'package:ar_chemistry_lab/services/experiment_service.dart';
+import 'package:ar_chemistry_lab/services/audio_vibration_service.dart';
+import 'package:ar_chemistry_lab/utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  
-  // Initialize services
-  final experimentService = ExperimentService();
-  await experimentService.loadExperiments();
-  
-  final arService = ARService();
-  await arService.initializeAR();
-  
+  try {
+    await Firebase.initializeApp();
+  } catch (e) {
+    debugPrint('Firebase initialization error: $e');
+  }
   runApp(const MyApp());
 }
 
@@ -31,30 +27,18 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
-        ProxyProvider<AppState, ExperimentService>(
-          update: (_, __, ___) => ExperimentService(),
-        ),
-        ProxyProvider<AppState, ARService>(
-          update: (_, __, ___) => ARService(),
-        ),
-        ProxyProvider<AppState, AudioService>(
-          update: (_, __, ___) => AudioService(),
-        ),
-        ProxyProvider<AppState, AIService>(
-          update: (_, __, ___) => AIService(),
-        ),
-        ProxyProvider<AppState, AnalyticsService>(
-          update: (_, __, ___) => AnalyticsService(),
-        ),
+        Provider(create: (_) => AIService()),
+        Provider(create: (_) => ARService()),
+        Provider(create: (_) => ExperimentService()),
+        Provider(create: (_) => AudioVibrationService()),
       ],
       child: MaterialApp(
         title: 'AR Chemistry Lab',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          useMaterial3: true,
-        ),
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.light,
         home: const HomeScreen(),
+        debugShowCheckedModeBanner: false,
       ),
     );
   }
