@@ -3,8 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ar_chemistry_lab/screens/home_screen.dart';
 import 'package:ar_chemistry_lab/services/app_state.dart';
-import 'package:ar_chemistry_lab/services/ai_service.dart';
-import 'package:ar_chemistry_lab/services/ar_service.dart';
 import 'package:ar_chemistry_lab/services/experiment_service.dart';
 import 'package:ar_chemistry_lab/services/audio_vibration_service.dart';
 import 'package:ar_chemistry_lab/utils/app_theme.dart';
@@ -27,8 +25,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AppState()),
-        Provider(create: (_) => AIService()),
-        Provider(create: (_) => ARService()),
         Provider(create: (_) => ExperimentService()),
         Provider(create: (_) => AudioVibrationService()),
       ],
